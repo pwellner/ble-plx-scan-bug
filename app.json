@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "test-bluetooth-sensors",
+    "slug": "test-bluetooth-sensors",
+    "android": {
+      "package": "com.aircoda.testbluetoothsensors",
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT",
+      ]
+    },
+    "ios": {
+      "infoPlist": {
+        "NSBluetoothPeripheralUsageDescription": "$(PRODUCT_NAME) infoPlist NSBluetoothPeripheralUsageDescription",
+        "UIBackgroundModes": [
+          "location",
+          "bluetooth-central"
+        ],
+        "UIRequiredDeviceCapabilities": [
+          "location-services"
+        ]
+      },
+      "bundleIdentifier": "com.aircoda.testbluetoothsensors"
+    },
+    "plugins": [
+      [
+        "@config-plugins/react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "modes": [
+            "central"
+          ],
+          "bluetoothAlwaysPermission": "$(PRODUCT_NAME) plugins bluetoothAlwaysPermission"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "54f80eb7-717b-4de7-86b2-c9cf740d5b86"
+      }
+    }
+  }
+}
