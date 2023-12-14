@@ -50,10 +50,25 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
     theBleManager.stopDeviceScan();
 
     console.log("Found devices:");
+    const foundUUIDs = {};
     const devices = Object.values(theFoundDevices).map(device => {
       logDevice(device);
+      if (device.serviceUUIDs) {
+        for (let uuid of device.serviceUUIDs) {
+          if (foundUUIDs[uuid]) {
+            foundUUIDs[uuid]++;
+          }
+          else {
+            foundUUIDs[uuid] = 1;
+          }
+        }
+      }
+      else {
+        foundUUIDs["null"] = foundUUIDs["null"] ? foundUUIDs["null"] + 1 : 1;
+      }
     });
-    console.log(`>>>> ${devices.length} devices found.`);
+    console.log(`>>>> ${devices.length} devices found with following UUIDs:`);
+    console.log(JSON.stringify(foundUUIDs, null, 4));
   }
 
   theScanTimeout = null;
