@@ -53,7 +53,7 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
     const devices = Object.values(theFoundDevices).map(device => {
       logDevice(device);
     });
-    console.log(devices.length + " devices found");
+    console.log(`>>>> ${devices.length} devices found.`);
   }
 
   theScanTimeout = null;
@@ -62,7 +62,8 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
 
   // Allow nearest device time to advertise
   const minSecondsToScan = 5.5; // At least target device's ad interval
-  console.log(`Scanning scenario '${scenario}' for ${minSecondsToScan}--${Math.round(maxSecondsToScan)} seconds} ...`);
+  console.log(`Scanning scenario '${scenario}' for ${minSecondsToScan}--${Math.round(maxSecondsToScan)} seconds
+  } ...`);
   let now = new Date().getTime();
   let earliestEnd = now + (minSecondsToScan * 1000);
   let scanningDeadline = Math.max(earliestEnd, now + (maxSecondsToScan * 1000));

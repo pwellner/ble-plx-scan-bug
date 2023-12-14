@@ -8,16 +8,12 @@
         "android.permission.BLUETOOTH",
         "android.permission.BLUETOOTH_SCAN",
         "android.permission.BLUETOOTH_ADMIN",
-        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.BLUETOOTH_CONNECT"
       ]
     },
     "ios": {
       "infoPlist": {
-        "NSBluetoothPeripheralUsageDescription": "$(PRODUCT_NAME) infoPlist NSBluetoothPeripheralUsageDescription",
-        "UIBackgroundModes": [
-          "location",
-          "bluetooth-central"
-        ],
+        "NSBluetoothAlwaysUsageDescription": "$(PRODUCT_NAME) infoPlist NSBluetoothAlwaysUsageDescription",
         "UIRequiredDeviceCapabilities": [
           "location-services"
         ]
@@ -32,7 +28,7 @@
           "modes": [
             "central"
           ],
-          "bluetoothAlwaysPermission": "$(PRODUCT_NAME) plugins bluetoothAlwaysPermission"
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) plugins NSBluetoothAlwaysUsageDescription"
         }
       ]
     ],

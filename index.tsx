@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { checkBluetoothPermissionsAsync, requestNeededPermissionsAsync } from './permissions';
+import { checkBluetoothPermissionsAsync, requestBluetoothPermissionsAsync } from './permissions';
 import { ScanScenario, scanForDevices } from './scan';
 import { registerRootComponent } from 'expo';
 registerRootComponent(TestApp);
@@ -34,7 +34,7 @@ export function TestApp() {
           <Button
             title="Get permissions"
             onPress={() => {
-              requestNeededPermissionsAsync()
+              requestBluetoothPermissionsAsync()
                 .then(isOk => {
                   setPermissionsOk(isOk);
                 })
