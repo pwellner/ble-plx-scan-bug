@@ -41,7 +41,7 @@ function logDevice(dev: Device) {
 export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario): void {
 
   function finishScanning() {
-    console.log(`finishScanning(${maxSecondsToScan}, ${scenario}) `);
+    //console.log(`finishScanning(${maxSecondsToScan}, ${scenario}) `);
     if (!theScanTimeout) {
       return; // Already stopped
     }

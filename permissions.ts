@@ -21,6 +21,12 @@ export async function checkBluetoothPermissionsAsync() {
     return false;
   }
 
+  isOk = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+  if (!isOk) {
+    console.log(`Checked permission ACCESS_FINE_LOCATION is ${isOk}`);
+    return false;
+  }
+  
   return isOk;
 }
 
@@ -33,6 +39,7 @@ export async function requestBluetoothPermissionsAsync() {
   let status = await PermissionsAndroid.requestMultiple([
     PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
     PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
   ]);
 
   for (let key in status) {
