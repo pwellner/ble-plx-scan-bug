@@ -2,7 +2,7 @@
   "name": "@aircoda/bluetooth-sensors",
   "version": "0.0.1",
   "description": "Code for https://github.com/dotintent/react-native-ble-plx/issues/1151",
-  "license": "Anything goes",
+  "license": "MIT",
   "author": "Pierre Wellner",
   "dependencies": {
     "@babel/preset-env": "^7.22.9",
