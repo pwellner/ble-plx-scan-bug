@@ -1,10 +1,10 @@
-import { BleError, BleManager, Device } from 'react-native-ble-plx';
+import { BleError, BleManager, Device, fullUUID, ScanMode, ScanOptions } from 'react-native-ble-plx';
 
 const EDDYSTONE_UUID = "0000feaa-0000-1000-8000-00805f9b34fb";
 const AR4_SERVICE_A = "f0cd1400-95da-4f4b-9ac8-aa55d312af0c"; // Old firmware
 const AR4_SERVICE_B = "0000fce0-0000-1000-8000-00805f9b34fb"; // New firmware
 
-const selectedUUIDs = [EDDYSTONE_UUID, AR4_SERVICE_A, AR4_SERVICE_B];
+const selectedUUIDs = [EDDYSTONE_UUID]; //, AR4_SERVICE_A, AR4_SERVICE_B];
 
 let theBleManager = new BleManager();
 
@@ -67,8 +67,9 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
         foundUUIDs["null"] = foundUUIDs["null"] ? foundUUIDs["null"] + 1 : 1;
       }
     });
-    console.log(`>>>> ${devices.length} devices found with ${Object.keys(foundUUIDs).length} UUIDs:`);
+    console.log(`>>>> ${devices.length} devices found with total of ${Object.keys(foundUUIDs).length} UUIDs`);
     console.log(JSON.stringify(foundUUIDs, null, 4));
+    console.log("names:" + JSON.stringify(Object.entries(theFoundDevices).map(d => d[1].name)));
   }
 
   theScanTimeout = null;
@@ -84,7 +85,7 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
   let scanningDeadline = Math.max(earliestEnd, now + (maxSecondsToScan * 1000));
   let serviceUuids =
     (scenario == ScanScenario.Selected) ?
-      selectedUUIDs // Any supported device
+      selectedUUIDs.map(uuid => fullUUID(uuid)) // Any supported device
       :
       (scenario == ScanScenario.Everything) ?
         null // For testing only. will not work in background
@@ -95,7 +96,10 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
   theScanTimeout = setTimeout(finishScanning, maxSecondsToScan * 1000);
   theBleManager.startDeviceScan(
     serviceUuids,
-    null,
+    {
+      scanMode: ScanMode.LowLatency,
+      // legacyScan: false
+    },
     (error: BleError | null, scannedDevice: Device | null) => {
       if (error) {
         // Scanning should stop automatically on error

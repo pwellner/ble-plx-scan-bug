@@ -21,18 +21,6 @@
       },
       "bundleIdentifier": "com.aircoda.testbluetoothsensors"
     },
-    "plugins": [
-      [
-        "@config-plugins/react-native-ble-plx",
-        {
-          "isBackgroundEnabled": true,
-          "modes": [
-            "central"
-          ],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) plugins NSBluetoothAlwaysUsageDescription"
-        }
-      ]
-    ],
     "extra": {
       "eas": {
         "projectId": "54f80eb7-717b-4de7-86b2-c9cf740d5b86"
