@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { checkBluetoothPermissionsAsync, requestBluetoothPermissionsAsync } from './permissions';
-import { ScanScenario, scanForDevices } from './scan';
+import { ScanScenario, scanForDevices, foundDeviceNames } from './scan';
 import { registerRootComponent } from 'expo';
 registerRootComponent(TestApp);
 
@@ -51,6 +51,12 @@ export function TestApp() {
       <Button
         title="Scan everything"
         onPress={() => scanPressHandler(ScanScenario.Everything)}
+      />
+      <Button
+        title="Found"
+        onPress={() => {
+          setMessage(foundDeviceNames());
+        }}
       />
       <Text>
         {message}

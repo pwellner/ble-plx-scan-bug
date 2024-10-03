@@ -19,6 +19,11 @@ var theFoundDevices: {
   [key: string]: Device;
 } = {};
 
+// Names of devices found so far, since start of last scan
+export function foundDeviceNames() {
+  return JSON.stringify(Object.entries(theFoundDevices).map(d => d[1].name));
+}
+
 function logDevice(dev: Device) {
   console.log("Scanned device '" +
     "name='" + dev.name + "' " +
@@ -69,7 +74,7 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
     });
     console.log(`>>>> ${devices.length} devices found with total of ${Object.keys(foundUUIDs).length} UUIDs`);
     console.log(JSON.stringify(foundUUIDs, null, 4));
-    console.log("names:" + JSON.stringify(Object.entries(theFoundDevices).map(d => d[1].name)));
+    console.log("names: " + foundDeviceNames());
   }
 
   theScanTimeout = null;
@@ -98,7 +103,7 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
     serviceUuids,
     {
       scanMode: ScanMode.LowLatency,
-      // legacyScan: false
+      // legacyScan: true
     },
     (error: BleError | null, scannedDevice: Device | null) => {
       if (error) {
