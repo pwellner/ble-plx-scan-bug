@@ -98,7 +98,7 @@ export function scanForDevices(maxSecondsToScan: number, scenario: ScanScenario)
     serviceUuids,
     {
       scanMode: ScanMode.LowLatency,
-      legacyScan: false
+      // legacyScan: false
     },
     (error: BleError | null, scannedDevice: Device | null) => {
       if (error) {
